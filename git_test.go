@@ -14,10 +14,10 @@ var _ = Describe("Git", func() {
 	path := os.Getenv("PATH")
 
 	BeforeEach(func() {
-		os.Setenv("PATH", fmt.Sprintf("./fixtures:%s", path))
+		_ = os.Setenv("PATH", fmt.Sprintf("./fixtures:%s", path))
 	})
 	AfterEach(func() {
-		os.Setenv("PATH", path)
+		_ = os.Setenv("PATH", path)
 	})
 
 	It("should know the current branch", func() {
