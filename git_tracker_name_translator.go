@@ -12,3 +12,7 @@ func GetPivotalTrackerTaskID(branchName string) int {
 	taskID, _ := strconv.Atoi(taskIDString)
 	return taskID
 }
+
+func GetStoryDescription(gitRepo GitRepository) string {
+	return "Cool Story Description"
+}

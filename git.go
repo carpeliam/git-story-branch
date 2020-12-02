@@ -10,3 +10,7 @@ func GetBranchName() string {
 	output, _ := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD").Output()
 	return strings.TrimSpace(string(output))
 }
+
+type GitRepository interface {
+	GetBranchName() string
+}
