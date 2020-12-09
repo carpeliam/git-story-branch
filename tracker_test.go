@@ -15,7 +15,7 @@ var _ = Describe("Tracker", func() {
 		// maybe we need to mock out tracker to have a story id of 123456789
 
 		// act
-		description := storybranch.GetStoryDescription(123456789)
+		description := storybranch.GetStoryDescriptionFromTracker(123456789)
 
 		// assert
 		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))

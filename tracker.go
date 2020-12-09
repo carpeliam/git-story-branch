@@ -1,6 +1,10 @@
 package storybranch
 
-// GetStoryDescription returns the story description
-func GetStoryDescription(storyID int) string {
+// GetStoryDescriptionFromTracker returns the story description
+func GetStoryDescriptionFromTracker(storyID int) string {
 	return ""
+}
+
+type PivotalTrackerReader interface {
+	GetStoryDescription(storyID int) string
 }
