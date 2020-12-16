@@ -7,12 +7,14 @@ import (
 
 // GetPivotalTrackerTaskID returns a string containing the task ID of the current branch name of the repository.
 func GetPivotalTrackerTaskID(branchName string) int {
-	re := regexp.MustCompile(`[1-9]+$`)
+	re := regexp.MustCompile(`\d+$`)
 	taskIDString := re.FindString(branchName)
 	taskID, _ := strconv.Atoi(taskIDString)
 	return taskID
 }
 
 func GetStoryDescription(gitRepo GitRepository, trackerReader PivotalTrackerReader) string {
-	return "Cool Story Description"
+	currentBranchName := gitRepo.GetBranchName()
+	storyID := GetPivotalTrackerTaskID(currentBranchName)
+	return trackerReader.GetStoryDescription(storyID)
 }

@@ -11,14 +11,14 @@ type MockGitRepository struct {
 }
 
 func (mockGitRepo MockGitRepository) GetBranchName() string {
-	return "Insert Branch Name Here-#123456789"
+	return "Insert Branch Name Here-#1234567890"
 }
 
 type MockPivotalTrackerReader struct {
 }
 
 func (mockTrackerReader MockPivotalTrackerReader) GetStoryDescription(storyID int) string {
-	if storyID == 123456789 {
+	if storyID == 1234567890 {
 		return "Description"
 	}
 	return "Wrong Description"
@@ -35,12 +35,12 @@ var _ = Describe("Git Tracker name translator", func() {
 		Expect(pivotalTrackerTaskID).To(Equal(123456789))
 	})
 
-	FIt("should retrieve a Pivotal Tracker Story based on the current git branch name", func() {
+	It("should retrieve a Pivotal Tracker Story based on the current git branch name", func() {
 		mockGitRepo := MockGitRepository{}
 		mockTrackerReader := MockPivotalTrackerReader{}
-		// Some execution
+
 		storyDescription := storybranch.GetStoryDescription(mockGitRepo, mockTrackerReader)
-		// Some expectation
+
 		Expect(storyDescription).To(Equal("Description"))
 	})
 })
