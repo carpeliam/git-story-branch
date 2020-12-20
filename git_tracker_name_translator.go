@@ -13,6 +13,7 @@ func GetPivotalTrackerTaskID(branchName string) int {
 	return taskID
 }
 
+// GetStoryDescription comment
 func GetStoryDescription(gitRepo GitRepository, trackerReader PivotalTrackerReader) string {
 	currentBranchName := gitRepo.GetBranchName()
 	storyID := GetPivotalTrackerTaskID(currentBranchName)

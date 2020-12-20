@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 
+	storybranch "github.com/carpeliam/git-story-branch"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
@@ -50,30 +51,12 @@ func (mockPivotalTrackerStoryService MockPivotalTrackerStoryService) GetByID(sto
 	return nil, nil, errors.New("Story does not exist.")
 }
 
-type Tracker struct {
-	storyService *PivotalTrackerStoryService
-}
-
-func (tracker Tracker) GetStoryDescriptionFromTracker(storyID int) string {
-	// Tracker is going to ask the Story Service to get the description
-	//GetByID(storyID int) (*pivotal.Story, *http.Response, error)
-	storyServicePointer := tracker.storyService
-	pivotalTrackerStory, _, _ := (*storyServicePointer).GetByID(storyID)
-	return pivotalTrackerStory.Description
-}
-
 var _ = Describe("Tracker", func() {
 
 	It("should be able to look up the description of a story given the story ID", func() {
-		storyService := &MockPivotalTrackerStoryService{}
-		// arrange
-		// TODO Why can't I pass in storyService directly?
-		var i PivotalTrackerStoryService
-		i = storyService
-		gub := Tracker{&i}
-		description := gub.GetStoryDescriptionFromTracker(123456789)
-
-		// assert
+		storyService := MockPivotalTrackerStoryService{}
+		trackerToTest := storybranch.Tracker{StoryService: storyService}
+		description := trackerToTest.GetStoryDescription(123456789)
 		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))
 	})
 })

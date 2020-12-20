@@ -11,6 +11,7 @@ func GetBranchName() string {
 	return strings.TrimSpace(string(output))
 }
 
+// GitRepository comment
 type GitRepository interface {
 	GetBranchName() string
 }

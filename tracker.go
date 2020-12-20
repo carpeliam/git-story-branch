@@ -1,27 +1,29 @@
 package storybranch
 
-import "net/http"
+import (
+	"net/http"
 
-// GetStoryDescriptionFromTracker returns the story description
-func GetStoryDescriptionFromTracker(storyID int) string {
-	return ""
-}
+	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
+)
 
-type PivotalTrackerClient interface {
-	Do(req *http.Request, v interface{}) (*http.Response, error)
-	NewRequest(method, urlPath string, body interface{}) (*http.Request, error)
-	SetBaseURL(baseURL string) error
-	SetUserAgent(agent string)
-}
-
+// PivotalTrackerReader comment
 type PivotalTrackerReader interface {
 	GetStoryDescription(storyID int) string
 }
 
-type RealPivotalTrackerReader struct {
+// PivotalTrackerStoryService comment
+type PivotalTrackerStoryService interface {
+	GetByID(storyID int) (*pivotal.Story, *http.Response, error)
 }
 
-func (realPivotalTrackerReader RealPivotalTrackerReader) GetStoryDescription(storyID int) string {
-	rptrDeleteMe := RealPivotalTrackerReader{&pivotal}
-	return "Do this later"
+// Tracker comment
+type Tracker struct {
+	StoryService PivotalTrackerStoryService
+}
+
+// GetStoryDescription comment
+func (tracker Tracker) GetStoryDescription(storyID int) string {
+	storyService := tracker.StoryService
+	pivotalTrackerStory, _, _ := storyService.GetByID(storyID)
+	return pivotalTrackerStory.Description
 }
