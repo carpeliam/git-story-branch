@@ -18,12 +18,17 @@ type PivotalTrackerStoryService interface {
 
 // Tracker comment
 type Tracker struct {
-	StoryService PivotalTrackerStoryService
+	storyService PivotalTrackerStoryService
 }
 
 // GetStoryDescription comment
 func (tracker Tracker) GetStoryDescription(storyID int) string {
-	storyService := tracker.StoryService
-	pivotalTrackerStory, _, _ := storyService.GetByID(storyID)
-	return pivotalTrackerStory.Description
+	storyService := tracker.storyService
+	story, _, _ := storyService.GetByID(storyID)
+	return story.Description
+}
+
+// NewTracker returns a new tracker
+func NewTracker(storyService PivotalTrackerStoryService) *Tracker {
+	return &Tracker{storyService}
 }

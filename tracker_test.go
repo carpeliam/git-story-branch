@@ -10,14 +10,9 @@ import (
 	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
 )
 
-type PivotalTrackerStoryService interface {
-	GetByID(storyID int) (*pivotal.Story, *http.Response, error)
-}
+type PivotalTrackerStoryServiceStub struct{}
 
-type MockPivotalTrackerStoryService struct {
-}
-
-func (mockPivotalTrackerStoryService MockPivotalTrackerStoryService) GetByID(storyID int) (*pivotal.Story, *http.Response, error) {
+func (pivotalTrackerStoryServiceStub PivotalTrackerStoryServiceStub) GetByID(storyID int) (*pivotal.Story, *http.Response, error) {
 	if storyID == 123456789 {
 		newStory := pivotal.Story{
 			ID:            123456789,
@@ -54,9 +49,9 @@ func (mockPivotalTrackerStoryService MockPivotalTrackerStoryService) GetByID(sto
 var _ = Describe("Tracker", func() {
 
 	It("should be able to look up the description of a story given the story ID", func() {
-		storyService := MockPivotalTrackerStoryService{}
-		trackerToTest := storybranch.Tracker{StoryService: storyService}
-		description := trackerToTest.GetStoryDescription(123456789)
+		tracker := storybranch.NewTracker(PivotalTrackerStoryServiceStub{})
+
+		description := tracker.GetStoryDescription(123456789)
 		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))
 	})
 })
