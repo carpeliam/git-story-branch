@@ -8,10 +8,10 @@ import (
 	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
 )
 
-func newTracker() *storybranch.Tracker {
+func newTracker() *storybranch.PivotalTracker {
 	apiToken := os.Getenv("TRACKER_API_TOKEN")
 	client := pivotal.NewClient(apiToken)
-	return storybranch.NewTracker(client.Stories)
+	return storybranch.NewPivotalTracker(client.Stories)
 }
 
 func main() {

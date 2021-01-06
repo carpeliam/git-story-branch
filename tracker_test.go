@@ -49,7 +49,7 @@ func (pivotalTrackerStoryServiceStub PivotalTrackerStoryServiceStub) GetByID(sto
 var _ = Describe("Tracker", func() {
 
 	It("should be able to look up the description of a story given the story ID", func() {
-		tracker := storybranch.NewTracker(PivotalTrackerStoryServiceStub{})
+		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
 
 		description := tracker.GetStoryDescription(123456789)
 		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))

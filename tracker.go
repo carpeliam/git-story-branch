@@ -6,29 +6,29 @@ import (
 	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
 )
 
-// PivotalTrackerReader comment
-type PivotalTrackerReader interface {
+// Tracker comment
+type Tracker interface {
 	GetStoryDescription(storyID int) string
 }
 
-// PivotalTrackerStoryService comment
-type PivotalTrackerStoryService interface {
+// StoryService comment
+type StoryService interface {
 	GetByID(storyID int) (*pivotal.Story, *http.Response, error)
 }
 
-// Tracker comment
-type Tracker struct {
-	storyService PivotalTrackerStoryService
+// PivotalTracker comment
+type PivotalTracker struct {
+	storyService StoryService
 }
 
 // GetStoryDescription comment
-func (tracker Tracker) GetStoryDescription(storyID int) string {
+func (tracker PivotalTracker) GetStoryDescription(storyID int) string {
 	storyService := tracker.storyService
 	story, _, _ := storyService.GetByID(storyID)
 	return story.Description
 }
 
-// NewTracker returns a new tracker
-func NewTracker(storyService PivotalTrackerStoryService) *Tracker {
-	return &Tracker{storyService}
+// NewPivotalTracker returns a new tracker
+func NewPivotalTracker(storyService StoryService) *PivotalTracker {
+	return &PivotalTracker{storyService}
 }
