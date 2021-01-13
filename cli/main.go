@@ -17,5 +17,5 @@ func newTracker() *storybranch.PivotalTracker {
 func main() {
 	tracker := newTracker()
 	description := storybranch.GetStoryDescription(storybranch.NewRepository(), tracker)
-	fmt.Printf("The description is %s\n", description)
+	fmt.Printf(description)
 }
