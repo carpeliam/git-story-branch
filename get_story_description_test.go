@@ -29,8 +29,9 @@ var _ = Describe("Git Tracker name translator", func() {
 		mockGitRepo := MockGitRepository{}
 		mockTrackerReader := MockPivotalTrackerReader{}
 
-		storyDescription := storybranch.GetStoryDescription(mockGitRepo, mockTrackerReader)
+		story := storybranch.GetStory(mockGitRepo, mockTrackerReader)
 
-		Expect(storyDescription).To(Equal("Description"))
+		Expect(story.Description).To(Equal("Description"))
+		Expect(story.State).To(Equal("delivered"))
 	})
 })
