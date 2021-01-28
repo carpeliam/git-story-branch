@@ -24,8 +24,8 @@ func GetStory(repo Repository, tracker Tracker) *Story {
 	storyID := getPivotalTrackerTaskID(currentBranchName)
 	
 	return &Story{
-		ID: "1234",
+		ID: strconv.Itoa(storyID),
 		Description: tracker.GetStoryDescription(storyID),
-		State: "delivered",
+		State: tracker.GetStoryState(storyID),
 	}
 }

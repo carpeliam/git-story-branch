@@ -24,6 +24,13 @@ func (mockTrackerReader MockPivotalTrackerReader) GetStoryDescription(storyID in
 	return "Wrong Description"
 }
 
+func (mockTrackerReader MockPivotalTrackerReader) GetStoryState(storyID int) string {
+	if storyID == 1234567890 {
+		return "delivered"
+	}
+	return "unstarted"
+}
+
 var _ = Describe("Git Tracker name translator", func() {
 	It("should retrieve a Pivotal Tracker Story based on the current git branch name", func() {
 		mockGitRepo := MockGitRepository{}

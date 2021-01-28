@@ -9,6 +9,7 @@ import (
 // Tracker comment
 type Tracker interface {
 	GetStoryDescription(storyID int) string
+	GetStoryState(storyID int) string
 }
 
 // StoryService comment
@@ -26,6 +27,12 @@ func (tracker PivotalTracker) GetStoryDescription(storyID int) string {
 	storyService := tracker.storyService
 	story, _, _ := storyService.GetByID(storyID)
 	return story.Description
+}
+
+func (tracker PivotalTracker) GetStoryState(storyID int) string {
+	storyService := tracker.storyService
+	story, _, _ := storyService.GetByID(storyID)
+	return story.State
 }
 
 // NewPivotalTracker returns a new tracker

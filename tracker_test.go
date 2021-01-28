@@ -20,7 +20,7 @@ func (pivotalTrackerStoryServiceStub PivotalTrackerStoryServiceStub) GetByID(sto
 			Name:          "My cool story",
 			Description:   "I dunno, uh, cool story... bro.. or something.",
 			Type:          "Type",
-			State:         "State",
+			State:         "delivered",
 			Estimate:      nil,
 			AcceptedAt:    nil,
 			Deadline:      nil,
@@ -53,5 +53,12 @@ var _ = Describe("Tracker", func() {
 
 		description := tracker.GetStoryDescription(123456789)
 		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))
+	})
+
+	It("should be able to look up the state of a story given the story ID", func() {
+		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
+
+		state := tracker.GetStoryState(123456789)
+		Expect(state).To(Equal("delivered"))
 	})
 })
