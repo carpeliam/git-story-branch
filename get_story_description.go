@@ -18,14 +18,10 @@ func getPivotalTrackerTaskID(branchName string) int {
 	return taskID
 }
 
-// GetStoryDescription comment
+// GetStory comment
 func GetStory(repo Repository, tracker Tracker) *Story {
 	currentBranchName := repo.GetBranchName()
 	storyID := getPivotalTrackerTaskID(currentBranchName)
 	
-	return &Story{
-		ID: strconv.Itoa(storyID),
-		Description: tracker.GetStoryDescription(storyID),
-		State: tracker.GetStoryState(storyID),
-	}
+	return tracker.GetStory(storyID)
 }

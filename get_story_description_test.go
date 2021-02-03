@@ -17,6 +17,17 @@ func (mockGitRepo MockGitRepository) GetBranchName() string {
 type MockPivotalTrackerReader struct {
 }
 
+func (mockTrackerReader MockPivotalTrackerReader) GetStory(storyID int) *storybranch.Story {
+	if storyID == 1234567890 {
+		return &storybranch.Story{
+			ID: "1234567890",
+			Description: "Description",
+			State: "delivered",
+		}
+	}
+	return nil
+}
+
 func (mockTrackerReader MockPivotalTrackerReader) GetStoryDescription(storyID int) string {
 	if storyID == 1234567890 {
 		return "Description"

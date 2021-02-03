@@ -61,4 +61,13 @@ var _ = Describe("Tracker", func() {
 		state := tracker.GetStoryState(123456789)
 		Expect(state).To(Equal("delivered"))
 	})
+
+	It("should be able to return a story given an ID", func() {
+		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
+
+		story := tracker.GetStory(123456789)
+		Expect(story.Description).To(Equal("I dunno, uh, cool story... bro.. or something."))
+		Expect(story.State).To(Equal("delivered"))
+		Expect(story.ID).To(Equal("123456789"))
+	})
 })
