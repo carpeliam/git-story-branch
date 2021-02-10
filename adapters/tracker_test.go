@@ -1,10 +1,10 @@
-package storybranch_test
+package adapters_test
 
 import (
 	"errors"
 	"net/http"
 
-	storybranch "github.com/carpeliam/git-story-branch"
+	"github.com/carpeliam/git-story-branch/adapters"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"gopkg.in/salsita/go-pivotaltracker.v2/v5/pivotal"
@@ -48,26 +48,13 @@ func (pivotalTrackerStoryServiceStub PivotalTrackerStoryServiceStub) GetByID(sto
 
 var _ = Describe("Tracker", func() {
 
-	It("should be able to look up the description of a story given the story ID", func() {
-		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
-
-		description := tracker.GetStoryDescription(123456789)
-		Expect(description).To(Equal("I dunno, uh, cool story... bro.. or something."))
-	})
-
-	It("should be able to look up the state of a story given the story ID", func() {
-		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
-
-		state := tracker.GetStoryState(123456789)
-		Expect(state).To(Equal("delivered"))
-	})
-
 	It("should be able to return a story given an ID", func() {
-		tracker := storybranch.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
+		tracker := adapters.NewPivotalTracker(PivotalTrackerStoryServiceStub{})
+		storyID := 123456789
 
-		story := tracker.GetStory(123456789)
+		story := tracker.GetStory(storyID)
 		Expect(story.Description).To(Equal("I dunno, uh, cool story... bro.. or something."))
 		Expect(story.State).To(Equal("delivered"))
-		Expect(story.ID).To(Equal("123456789"))
+		Expect(story.ID).To(Equal(storyID))
 	})
 })

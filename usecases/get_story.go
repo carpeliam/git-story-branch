@@ -1,4 +1,4 @@
-package storybranch
+package usecases
 
 import (
 	"regexp"
@@ -6,7 +6,7 @@ import (
 )
 
 type Story struct {
-	ID string
+	ID int
 	Description string
 	State string
 }
@@ -24,4 +24,14 @@ func GetStory(repo Repository, tracker Tracker) *Story {
 	storyID := getPivotalTrackerTaskID(currentBranchName)
 	
 	return tracker.GetStory(storyID)
+}
+
+// Tracker comment
+type Tracker interface {
+	GetStory(storyID int) *Story
+}
+
+// Repository comment
+type Repository interface {
+	GetBranchName() string
 }
