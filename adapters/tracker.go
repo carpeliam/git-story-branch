@@ -30,6 +30,6 @@ func (tracker PivotalTracker) GetStory(storyID int) *usecases.Story {
 }
 
 // NewPivotalTracker returns a new tracker
-func NewPivotalTracker(storyService StoryService) *PivotalTracker {
+func NewPivotalTracker(storyService StoryService) usecases.Tracker {
 	return &PivotalTracker{storyService}
 }
