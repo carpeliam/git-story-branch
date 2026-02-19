@@ -1,5 +1,7 @@
 # git-story-branch
 
+*This is archived, as Pivotal Tracker is no longer with us 😭 If you're a [Shortcut](https://www.shortcut.com/) user, please consider [gitshorty](https://github.com/carpeliam/gitshorty).*
+
 So you've got a branch, and it's in support of a particular user story, so you put your story id at the end of your branch name.
 
 With the power of `git-story-branch`, this allows you to:
